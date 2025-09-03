@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Foodies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Dark Gray */
+            color: #F9FAFB; /* Light Gray */
+              opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+        }
+      
+  body.loaded {
+    opacity: 1;
+  }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-900/80 backdrop-blur-md shadow-lg fixed w-full z-20 top-0 start-0 border-b border-gray-600">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="index.html" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <svg class="w-8 h-8 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21.747c-5.933 0-9-3.067-9-9s3.067-9 9-9 9 3.067 9 9-3.067 9-9 9z"></path></svg>
+                <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">Foodies</span>
+            </a>
+            <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse items-center">
+                 <div class="relative mr-4">
+                    <a href="cart.html">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </a>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-orange-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </div>
+                <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-400 rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+                <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 bg-gray-800 md:bg-transparent border-gray-700">
+                    <li><a href="index.html" class="block py-2 px-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-orange-500 md:p-0 text-white">Home</a></li>
+                    <li><a href="menu.html" class="block py-2 px-3 text-white bg-orange-600 rounded md:bg-transparent md:text-orange-500 md:p-0" aria-current="page">Menu</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Menu Section -->
+    <section class="py-24 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-extrabold text-center mb-12 text-white">Our Menu</h2>
+            <div id="menu-items" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Product cards will be injected here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Add to Cart Notification -->
+    <div id="cart-notification" class="fixed bottom-5 right-5 bg-green-500 text-white py-2 px-4 rounded-lg shadow-lg hidden">
+        Item added to cart!
+    </div>
+    
+    <footer class="bg-gray-900 shadow mt-16">
+        <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+          <span class="text-sm text-gray-400 sm:text-center">© 2023 <a href="#" class="hover:underline">Foodies™</a>. All Rights Reserved.
+        </span>
+        <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-400 sm:mt-0">
+            <li><a href="#" class="hover:underline me-4 md:me-6">About</a></li>
+            <li><a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a></li>
+            <li><a href="#" class="hover:underline">Contact</a></li>
+        </ul>
+        </div>
+    </footer>
+
+   <script>
+    const products = [
+        { id: 1, name: 'Cheese Burger', desc: 'Juicy beef patty with melted cheese, lettuce, and tomato.', price: 8.99, img: 'https://placehold.co/400x300/111827/FFF?text=Burger' },
+        { id: 2, name: 'Chicken Shawarma', desc: 'Marinated chicken wrapped in pita bread with garlic sauce.', price: 6.49, img: 'https://placehold.co/400x300/111827/FFF?text=Shawarma' },
+        { id: 3, name: 'Pepperoni Pizza', desc: 'Classic pizza topped with cheese and pepperoni slices.', price: 11.99, img: 'https://placehold.co/400x300/111827/FFF?text=Pizza' },
+        { id: 4, name: 'Fried Rice with Chicken', desc: 'Savory fried rice served with crispy chicken.', price: 9.50, img: 'https://placehold.co/400x300/111827/FFF?text=Fried+Rice' },
+        { id: 5, name: 'Spaghetti Bolognese', desc: 'Italian pasta with rich tomato meat sauce.', price: 10.99, img: 'https://placehold.co/400x300/111827/FFF?text=Spaghetti' },
+        { id: 6, name: 'Grilled Fish', desc: 'Fresh tilapia grilled with lemon and herbs.', price: 12.75, img: 'https://placehold.co/400x300/111827/FFF?text=Fish' },
+        { id: 7, name: 'Vegetable Salad', desc: 'Fresh greens, cucumbers, tomatoes, and vinaigrette.', price: 5.99, img: 'https://placehold.co/400x300/111827/FFF?text=Salad' },
+        { id: 8, name: 'French Fries', desc: 'Crispy golden fries served hot.', price: 3.99, img: 'https://placehold.co/400x300/111827/FFF?text=Fries' },
+        { id: 9, name: 'Chocolate Cake', desc: 'Moist chocolate cake slice with icing.', price: 4.99, img: 'https://placehold.co/400x300/111827/FFF?text=Cake' },
+        { id: 10, name: 'Vanilla Ice Cream', desc: 'Creamy vanilla ice cream scoop.', price: 2.99, img: 'https://placehold.co/400x300/111827/FFF?text=Ice+Cream' },
+        { id: 11, name: 'Fried Plantain', desc: 'Sweet fried plantain slices.', price: 3.49, img: 'https://placehold.co/400x300/111827/FFF?text=Plantain' },
+        { id: 12, name: 'Chicken Wings', desc: 'Spicy BBQ chicken wings (6 pieces).', price: 7.99, img: 'https://placehold.co/400x300/111827/FFF?text=Wings' },
+        { id: 13, name: 'Grilled Steak', desc: 'Tender beef steak with mashed potatoes.', price: 15.99, img: 'https://placehold.co/400x300/111827/FFF?text=Steak' },
+        { id: 14, name: 'Egg Fried Noodles', desc: 'Stir-fried noodles with eggs and veggies.', price: 6.99, img: 'https://placehold.co/400x300/111827/FFF?text=Noodles' },
+        { id: 15, name: 'Spring Rolls', desc: 'Crunchy rolls filled with vegetables.', price: 4.49, img: 'https://placehold.co/400x300/111827/FFF?text=Spring+Rolls' },
+        { id: 16, name: 'Fresh Fruit Juice', desc: 'Orange, pineapple, or apple juice.', price: 2.50, img: 'https://placehold.co/400x300/111827/FFF?text=Juice' },
+        { id: 17, name: 'Smoothie', desc: 'Blended fruit smoothie with yogurt.', price: 3.99, img: 'https://placehold.co/400x300/111827/FFF?text=Smoothie' },
+        { id: 18, name: 'Club Sandwich', desc: 'Triple-layer sandwich with chicken and veggies.', price: 6.99, img: 'https://placehold.co/400x300/111827/FFF?text=Sandwich' },
+        { id: 19, name: 'Pancakes with Syrup', desc: 'Fluffy pancakes topped with maple syrup.', price: 5.25, img: 'https://placehold.co/400x300/111827/FFF?text=Pancakes' },
+        { id: 20, name: 'Hot Coffee', desc: 'Freshly brewed black coffee.', price: 1.99, img: 'https://placehold.co/400x300/111827/FFF?text=Coffee' }
+    ];
+
+    const menuItemsContainer = document.getElementById('menu-items');
+    const cartCount = document.getElementById('cart-count');
+    const cartNotification = document.getElementById('cart-notification');
+
+    // Render menu products
+    products.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300';
+        
+        card.innerHTML = `
+            <img src="${product.img}" alt="${product.name}" class="w-full h-48 object-cover">
+            <div class="p-6">
+                <h3 class="text-xl font-bold text-white mb-2">${product.name}</h3>
+                <p class="text-gray-400 text-sm mb-4">${product.desc}</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-2xl font-bold text-orange-500">$${product.price.toFixed(2)}</span>
+                    <button class="add-to-cart-btn bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300" data-id="${product.id}">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        `;
+        menuItemsContainer.appendChild(card);
+    });
+
+    // Get cart from localStorage
+    function getCart() {
+        return JSON.parse(localStorage.getItem('cart')) || [];
+    }
+
+    // Save cart to localStorage
+    function saveCart(cart) {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    // Update cart badge
+    function updateCartCount() {
+        const cart = getCart();
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCount.textContent = totalItems;
+    }
+
+    // Add product to cart
+    function addToCart(productId) {
+        let cart = getCart();
+        const product = products.find(p => p.id === productId);
+        const existing = cart.find(item => item.id === productId);
+
+        if (existing) {
+            existing.quantity++;
+        } else {
+            cart.push({ ...product, quantity: 1 });
+        }
+
+        saveCart(cart);
+        updateCartCount();
+
+        // Show "added" notification
+        cartNotification.classList.remove('hidden');
+        setTimeout(() => cartNotification.classList.add('hidden'), 2000);
+    }
+
+    // Attach event listeners
+    document.addEventListener('click', e => {
+        if (e.target.classList.contains('add-to-cart-btn')) {
+            const id = parseInt(e.target.dataset.id);
+            addToCart(id);
+        }
+    });
+
+    // Initialize cart count on page load
+    updateCartCount();
+
+
+       // Mobile nav toggle
+    const navToggle = document.querySelector('[data-collapse-toggle="navbar-sticky"]');
+    const navMenu = document.getElementById('navbar-sticky');
+
+    navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('hidden');
+    });
+
+   
+
+    
+
+  window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+  });
+
+  // Optional: fade-out before navigating away
+  document.querySelectorAll('a[href]').forEach(link => {
+    link.addEventListener('click', e => {
+      const href = link.getAttribute('href');
+      if (href.startsWith('#') || href.startsWith('javascript')) return; // skip anchors & JS links
+      e.preventDefault();
+      document.body.classList.remove('loaded'); // fade out
+      setTimeout(() => {
+        window.location.href = href;
+      }, 400); // match transition duration
+    });
+  });
+
+
+</script>
+
+</body>
+</html>

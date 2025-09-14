@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Foodies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Dark Gray */
+            color: #F9FAFB; /* Light Gray */
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+      
+        body.loaded {
+            opacity: 1;
+        }
+
+        /* Custom styles for range slider */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #4b5563; /* Gray-600 */
+            border-radius: 5px;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #ea580c; /* Orange-600 */
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #ea580c; /* Orange-600 */
+            cursor: pointer;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-900/80 backdrop-blur-md shadow-lg fixed w-full z-20 top-0 start-0 border-b border-gray-600">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="index.html" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <svg class="w-8 h-8 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21.747c-5.933 0-9-3.067-9-9s3.067-9 9-9 9 3.067 9 9-3.067 9-9 9z"></path></svg>
+                <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">Foodies</span>
+            </a>
+            <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse items-center">
+                 <div class="relative mr-4">
+                    <a href="cart.html">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </a>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-orange-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </div>
+                <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-400 rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+                <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 bg-gray-800 md:bg-transparent border-gray-700">
+                    <li><a href="index.html" class="block py-2 px-3 rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-orange-500 md:p-0 text-white">Home</a></li>
+                    <li><a href="menu.html" class="block py-2 px-3 text-white bg-orange-600 rounded md:bg-transparent md:text-orange-500 md:p-0" aria-current="page">Menu</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Menu Section -->
+    <section class="py-24 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-extrabold text-center mb-12 text-white">Our Menu</h2>
+
+            <!-- Search and Filter Controls -->
+            <div class="mb-10 p-6 bg-gray-800 rounded-lg shadow-md max-w-3xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="search-input" class="block mb-2 text-sm font-medium text-gray-300">Search Food</label>
+                        <input type="text" id="search-input" placeholder="e.g. Burger, Pizza..." class="w-full bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 p-2.5">
+                    </div>
+                    <div>
+                        <label for="price-filter" class="block mb-2 text-sm font-medium text-gray-300">Max Price: <span id="price-value" class="font-bold text-orange-500">$20.00</span></label>
+                        <input type="range" id="price-filter" min="0" max="20" step="0.5" value="20" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer">
+                    </div>
+                </div>
+            </div>
+
+            <div id="menu-items" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Product cards will be injected here by JavaScript -->
+            </div>
+            <div id="no-results" class="text-center text-gray-400 py-16 hidden">
+                <p class="text-2xl font-semibold">No items match your filter.</p>
+                <p>Try adjusting your search or price range.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add to Cart Notification -->
+    <div id="cart-notification" class="fixed bottom-5 right-5 bg-green-500 text-white py-2 px-4 rounded-lg shadow-lg hidden">
+        Item added to cart!
+    </div>
+    
+    <footer class="bg-gray-900 shadow mt-16">
+        <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+          <span class="text-sm text-gray-400 sm:text-center">© 2023 <a href="#" class="hover:underline">Foodies™</a>. All Rights Reserved.
+        </span>
+        <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-400 sm:mt-0">
+            <li><a href="#" class="hover:underline me-4 md:me-6">About</a></li>
+            <li><a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a></li>
+            <li><a href="#" class="hover:underline">Contact</a></li>
+        </ul>
+        </div>
+    </footer>
+
+   <script>
+    const products = [
+        { id: 1, name: 'Cheese Burger', desc: 'Juicy beef patty with melted cheese, lettuce, and tomato.', price: 8.99, img: 'https://cdn.corenexis.com/view/6866769168' },
+        { id: 2, name: 'Chicken Shawarma', desc: 'Marinated chicken wrapped in pita bread with garlic sauce.', price: 6.49, img: 'image/Chicken-Shawarma.jpg' },
+        { id: 3, name: 'Pepperoni Pizza', desc: 'Classic pizza topped with cheese and pepperoni slices.', price: 11.99, img: 'image/Pepperoni Pizza.jpg' },
+        { id: 4, name: 'Fried Rice with Chicken', desc: 'Savory fried rice served with crispy chicken.', price: 9.50, img: 'image/Fried-Rice-with-Chicken.jpg' },
+        { id: 5, name: 'Spaghetti Bolognese', desc: 'Italian pasta with rich tomato meat sauce.', price: 10.99, img: 'image/Spaghetti-Bolognese.jpg' },
+        { id: 6, name: 'Grilled Fish', desc: 'Fresh tilapia grilled with lemon and herbs.', price: 12.75, img: 'image/close-up-fried-whole-fish-served-with-sauce.jpg' },
+        { id: 7, name: 'Vegetable Salad', desc: 'Fresh greens, cucumbers, tomatoes, and vinaigrette.', price: 5.99, img: 'image/dietary-salad-with-tomatoes-feta-lettuce-spinach-pine-nuts.jpg' },
+        { id: 8, name: 'French Fries', desc: 'Crispy golden fries served hot.', price: 3.99, img: 'image/French-Fries.jpg' },
+        { id: 9, name: 'Chocolate Cake', desc: 'Moist chocolate cake slice with icing.', price: 4.99, img: 'image/Chocolate-Cake.jpg' },
+        { id: 10, name: 'Vanilla Ice Cream', desc: 'Creamy vanilla ice cream scoop.', price: 2.99, img: 'image/Vanilla-Ice-Cream.jpg' },
+        { id: 11, name: 'Fried Plantain', desc: 'Sweet fried plantain slices.', price: 3.49, img: 'image/Fried-Plantain.jpg' },
+        { id: 12, name: 'Chicken Wings', desc: 'Spicy BBQ chicken wings (6 pieces).', price: 7.99, img: 'image/Chicken-Wings.jpg' },
+        { id: 13, name: 'Grilled Steak', desc: 'Tender beef steak with mashed potatoes.', price: 15.99, img: 'image/Grilled-Steak.jpg' },
+        { id: 14, name: 'Egg Fried Noodles', desc: 'Stir-fried noodles with eggs and veggies.', price: 6.99, img: 'image/Egg-Fried-Noodles.jpg' },
+        { id: 15, name: 'Spring Rolls', desc: 'Crunchy rolls filled with vegetables.', price: 4.49, img: 'image/Spring-Rolls.jpg' },
+        { id: 16, name: 'Fresh Fruit Juice', desc: 'Orange, pineapple, or apple juice.', price: 2.50, img: 'image/Fresh-Fruit-Juice.jpg' },
+        { id: 17, name: 'Smoothie', desc: 'Blended fruit smoothie with yogurt.', price: 3.99, img: 'image/Smoothie.jpg' },
+        { id: 18, name: 'Club Sandwich', desc: 'Triple-layer sandwich with chicken and veggies.', price: 6.99, img: 'image/Club-Sandwich.jpg' },
+        { id: 19, name: 'Pancakes with Syrup', desc: 'Fluffy pancakes topped with maple syrup.', price: 5.25, img: 'image/Pancakes-with-Syrup.jpg' },
+        { id: 20, name: 'Hot Coffee', desc: 'Freshly brewed black coffee.', price: 1.99, img: 'image/Hot-Coffee.jpg' }
+    ];
+
+    const menuItemsContainer = document.getElementById('menu-items');
+    const cartCount = document.getElementById('cart-count');
+    const cartNotification = document.getElementById('cart-notification');
+    const searchInput = document.getElementById('search-input');
+    const priceFilter = document.getElementById('price-filter');
+    const priceValue = document.getElementById('price-value');
+    const noResultsDiv = document.getElementById('no-results');
+
+    // Function to render menu products based on filters
+    function renderMenu(filteredProducts) {
+        menuItemsContainer.innerHTML = ''; // Clear existing items
+        
+        if (filteredProducts.length === 0) {
+            noResultsDiv.classList.remove('hidden');
+        } else {
+            noResultsDiv.classList.add('hidden');
+        }
+
+        filteredProducts.forEach(product => {
+            const card = document.createElement('div');
+            card.className = 'bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300';
+            
+            card.innerHTML = `
+                <img src="${product.img}" alt="${product.name}" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1f2937/f9fafb?text=Image+Not+Found';">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">${product.name}</h3>
+                    <p class="text-gray-400 text-sm mb-4">${product.desc}</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-orange-500">$${product.price.toFixed(2)}</span>
+                        <button class="add-to-cart-btn bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300" data-id="${product.id}">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `;
+            menuItemsContainer.appendChild(card);
+        });
+    }
+
+    // Function to filter products
+    function filterProducts() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const maxPrice = parseFloat(priceFilter.value);
+
+        priceValue.textContent = `$${maxPrice.toFixed(2)}`;
+
+        const filtered = products.filter(product => {
+            const nameMatch = product.name.toLowerCase().includes(searchTerm);
+            const priceMatch = product.price <= maxPrice;
+            return nameMatch && priceMatch;
+        });
+
+        renderMenu(filtered);
+    }
+
+    // Event listeners for filters
+    searchInput.addEventListener('input', filterProducts);
+    priceFilter.addEventListener('input', filterProducts);
+
+    // Initial render of all products
+    renderMenu(products);
+
+    // --- Cart Functionality ---
+    
+    // Get cart from localStorage
+    function getCart() {
+        return JSON.parse(localStorage.getItem('cart')) || [];
+    }
+
+    // Save cart to localStorage
+    function saveCart(cart) {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    // Update cart badge
+    function updateCartCount() {
+        const cart = getCart();
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCount.textContent = totalItems;
+    }
+
+    // Add product to cart
+    function addToCart(productId) {
+        let cart = getCart();
+        const product = products.find(p => p.id === productId);
+        const existing = cart.find(item => item.id === productId);
+
+        if (existing) {
+            existing.quantity++;
+        } else {
+            cart.push({ ...product, quantity: 1 });
+        }
+
+        saveCart(cart);
+        updateCartCount();
+
+        // Show "added" notification
+        cartNotification.classList.remove('hidden');
+        setTimeout(() => cartNotification.classList.add('hidden'), 2000);
+    }
+
+    // Attach event listeners for add to cart
+    document.addEventListener('click', e => {
+        if (e.target.classList.contains('add-to-cart-btn')) {
+            const id = parseInt(e.target.dataset.id);
+            addToCart(id);
+        }
+    });
+
+    // Initialize cart count on page load
+    updateCartCount();
+
+    // --- General Page Scripts ---
+
+    // Mobile nav toggle
+    const navToggle = document.querySelector('[data-collapse-toggle="navbar-sticky"]');
+    const navMenu = document.getElementById('navbar-sticky');
+    navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('hidden');
+    });
+
+    // Page load animation
+    window.addEventListener('load', () => {
+        document.body.classList.add('loaded');
+    });
+
+    // Optional: fade-out before navigating away
+    document.querySelectorAll('a[href]').forEach(link => {
+        link.addEventListener('click', e => {
+          const href = link.getAttribute('href');
+          // Don't fade for anchor links, js links, or links opening in a new tab
+          if (href.startsWith('#') || href.startsWith('javascript') || link.target === '_blank') return;
+          e.preventDefault();
+          document.body.classList.remove('loaded'); // fade out
+          setTimeout(() => {
+            window.location.href = href;
+          }, 400); // match transition duration
+        });
+    });
+
+</script>
+
+</body>
+</html>
+
